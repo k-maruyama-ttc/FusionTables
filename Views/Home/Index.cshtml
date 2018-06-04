@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "世界の首都一覧";
+}
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h2>@ViewBag.Title</h2>
+
+    <div id="map"></div>
+<script>
+
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 35.658581, lng: 139.745433 },
+            zoom: 3
+        });
+
+        var layer = new google.maps.FusionTablesLayer({
+            query: {
+                select: 'lat', //フィールド名
+                from: '1iHkqZVVfZy1D3LiYiIvtpmRP6cGkDY9HaRZIMYBe' //テーブル名
+            },
+            styles: [{
+                markerOptions: {
+                    iconName: "small_red"
+                }
+            }]
+        });
+        layer.setMap(map);
+    };
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXtpvx6Z6hX3elFAYWyFZ4SwBhQJvxPU0&callback=initMap"></script>
+</body>
